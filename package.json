@@ -1,0 +1,17 @@
+{
+  "name": "Lab4",
+  "version": "1.0.0",
+  "description": "A simple web server with caching",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon main.js --host localhost --port 3000 --cache ./cache"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.0"
+  }
+
+}
