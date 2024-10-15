@@ -13,7 +13,7 @@ const getCacheFilePath = (code) => path.join(CACHE_DIR, `${code}.jpg`);
 fs.mkdir(CACHE_DIR, { recursive: true });
 
 const requestListener = async (req, res) => {
-    const code = req.url.slice(1); // Отримуємо код з URL
+    const code = req.url.slice(1); 
     const filePath = getCacheFilePath(code);
 
     if (req.method === 'GET') {
@@ -23,10 +23,10 @@ const requestListener = async (req, res) => {
             res.writeHead(200, { 'Content-Type': 'image/jpeg' });
             res.end(image);
         } catch {
-            // Якщо картинки немає в кеші, пробуємо отримати її з http.cat
+            
             try {
                 const response = await superagent.get(`https://http.cat/${code}`);
-                await fs.writeFile(filePath, response.body); // Зберігаємо у кеш
+                await fs.writeFile(filePath, response.body); 
                 res.writeHead(200, { 'Content-Type': 'image/jpeg' });
                 res.end(response.body);
             } catch {
@@ -38,13 +38,13 @@ const requestListener = async (req, res) => {
         let body = [];
         req.on('data', chunk => body.push(chunk));
         req.on('end', async () => {
-            await fs.writeFile(filePath, Buffer.concat(body)); // Записуємо файл у кеш
+            await fs.writeFile(filePath, Buffer.concat(body)); 
             res.writeHead(201);
             res.end();
         });
     } else if (req.method === 'DELETE') {
         try {
-            await fs.unlink(filePath); // Видаляємо файл
+            await fs.unlink(filePath);
             res.writeHead(200);
             res.end();
         } catch {
