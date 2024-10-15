@@ -6,10 +6,10 @@ const path = require('path');
 const PORT = 3000;
 const CACHE_DIR = path.join(__dirname, 'cache');
 
-// Функція для формування шляху до файлів кешу
+
 const getCacheFilePath = (code) => path.join(CACHE_DIR, `${code}.jpg`);
 
-// Створення кешу папки, якщо її не існує
+
 fs.mkdir(CACHE_DIR, { recursive: true });
 
 const requestListener = async (req, res) => {
